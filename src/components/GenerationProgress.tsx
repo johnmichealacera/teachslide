@@ -56,31 +56,31 @@ export default function GenerationProgress({ isGenerating }: GenerationProgressP
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
-      <div className="text-center mb-6">
-        <div className="flex justify-center mb-4">
-          <Sparkles className="w-12 h-12 text-blue-600 animate-pulse" />
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8">
+      <div className="text-center mb-4 sm:mb-6">
+        <div className="flex justify-center mb-3 sm:mb-4">
+          <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-blue-600 animate-pulse" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
           Generating Your Presentation
         </h2>
-        <p className="text-gray-600">
+        <p className="text-sm sm:text-base text-gray-600">
           This usually takes 30-60 seconds
         </p>
       </div>
 
       {/* Progress Steps */}
-      <div className="space-y-4 mb-6">
+      <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
         {steps.map((step, index) => (
           <div
             key={index}
-            className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+            className={`flex items-center space-x-2 sm:space-x-3 p-3 rounded-lg transition-colors ${
               index <= currentStep 
                 ? 'bg-blue-50 border border-blue-200' 
                 : 'bg-gray-50 border border-gray-200'
             }`}
           >
-            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+            <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
               index < currentStep 
                 ? 'bg-green-500 text-white' 
                 : index === currentStep 
@@ -88,12 +88,12 @@ export default function GenerationProgress({ isGenerating }: GenerationProgressP
                 : 'bg-gray-300 text-gray-600'
             }`}>
               {index < currentStep ? (
-                <CheckCircle className="w-4 h-4" />
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
               ) : (
                 <span className="text-xs font-medium">{index + 1}</span>
               )}
             </div>
-            <span className={`text-sm ${
+            <span className={`text-xs sm:text-sm ${
               index <= currentStep ? 'text-gray-900' : 'text-gray-500'
             }`}>
               {step}
@@ -105,7 +105,7 @@ export default function GenerationProgress({ isGenerating }: GenerationProgressP
       {/* Timer */}
       <div className="flex items-center justify-center space-x-2 text-gray-600">
         <Clock className="w-4 h-4" />
-        <span className="text-sm">
+        <span className="text-xs sm:text-sm">
           Time elapsed: {formatTime(elapsedTime)}
         </span>
       </div>

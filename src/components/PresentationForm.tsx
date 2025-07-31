@@ -45,7 +45,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
       {/* Topic Input */}
       <div>
         <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-2">
@@ -58,12 +58,12 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           value={formData.topic}
           onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
           placeholder="e.g., Introduction to Programming, Educational Psychology, Digital Literacy"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
           required
         />
         <div className="mt-2">
           <p className="text-xs text-gray-500 mb-2">Example topics:</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             {exampleTopics.map((topic) => (
               <button
                 key={topic}
@@ -88,7 +88,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           id="classLevel"
           value={formData.classLevel}
           onChange={(e) => setFormData({ ...formData, classLevel: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
         >
           {classLevels.map((level) => (
             <option key={level} value={level}>
@@ -108,7 +108,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           id="duration"
           value={formData.duration}
           onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
         >
           {durations.map((duration) => (
             <option key={duration} value={duration}>
@@ -130,7 +130,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           onChange={(e) => setFormData({ ...formData, teachingGoals: e.target.value })}
           placeholder="What should students learn or understand by the end of this class?"
           rows={3}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
         />
       </div>
 
@@ -138,11 +138,11 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
       <button
         type="submit"
         disabled={isLoading || !formData.topic.trim()}
-        className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full bg-blue-600 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
       >
         {isLoading ? (
           <div className="flex items-center justify-center">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+            <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white mr-2"></div>
             Generating Presentation...
           </div>
         ) : (
