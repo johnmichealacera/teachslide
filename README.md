@@ -9,11 +9,12 @@ A web application that generates ready-made class presentations for educators wi
 - **Age-Appropriate**: Tailored for different class levels
 - **No Account Required**: Simple, frictionless experience
 - **Export Options**: Download presentations as text files
+- **Dynamic Model Selection**: Automatically uses the latest available free AI model to avoid deprecation issues
 
 ## Tech Stack
 
 - **Frontend**: Next.js 15 with TypeScript and Tailwind CSS
-- **AI**: Groq API (llama3-8b-8192) for content generation
+- **AI**: Groq API with dynamic model selection for content generation
 - **UI**: Lucide React icons, React Hot Toast for notifications
 - **Styling**: Tailwind CSS v4
 
@@ -21,7 +22,7 @@ A web application that generates ready-made class presentations for educators wi
 
 - **🚀 Ultra-Fast**: Groq's inference engine provides near-instant responses
 - **💰 Cost-Effective**: Free tier with generous limits for educational use
-- **🎯 High Quality**: llama3-8b-8192 model delivers excellent educational content
+- **🎯 High Quality**: Automatically selects the best available model for excellent educational content
 - **🔒 Privacy-Focused**: No data retention, perfect for educational environments
 
 ## Quick Start
@@ -73,20 +74,43 @@ A web application that generates ready-made class presentations for educators wi
 ```
 src/
 ├── app/
-│   ├── api/generate/     # OpenAI API integration
+│   ├── api/
+│   │   ├── debug/model/  # Model debugging endpoint
+│   │   └── generate/     # Presentation generation API
 │   ├── globals.css       # Global styles
 │   ├── layout.tsx        # Root layout
 │   └── page.tsx          # Main page
 ├── components/
 │   ├── PresentationForm.tsx      # Input form
 │   └── PresentationDisplay.tsx   # Results display
-└── types/
-    └── presentation.ts   # TypeScript interfaces
+├── types/
+│   └── presentation.ts   # TypeScript interfaces
+└── utils/
+    └── groqClient.ts     # Dynamic Groq API client
 ```
 
 ## API Endpoints
 
 - `POST /api/generate` - Generates presentation content using Groq API
+- `GET /api/debug/model` - Shows currently selected model and refreshes cache (for debugging)
+
+## Dynamic Model Selection
+
+The application automatically selects the best available free model from Groq to ensure:
+
+- **No Deprecation Errors**: Avoids hardcoded models that may become unavailable
+- **Optimal Performance**: Always uses the latest and most capable free models
+- **Smart Fallbacks**: Multiple fallback options ensure the app keeps working
+- **Automatic Caching**: Models are cached for 1 hour to reduce API calls
+
+### Model Selection Priority
+
+1. **Llama 3 8B models** (e.g., `llama3-8b-8192`) - Fast and efficient
+2. **Llama 3 70B models** (e.g., `llama3-70b-8192`) - Higher quality when available
+3. **Mixtral models** (e.g., `mixtral-8x7b-32768`) - Good alternative option
+4. **Gemma models** (e.g., `gemma-7b-it`) - Backup option
+
+The system automatically detects active models and selects the best match based on these preferences.
 
 ## Future Enhancements
 
