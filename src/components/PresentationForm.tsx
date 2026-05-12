@@ -48,7 +48,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
     <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
       {/* Topic Input */}
       <div>
-        <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="topic" className="block text-sm font-semibold text-gray-900 mb-2">
           <BookOpen className="inline w-4 h-4 mr-2" />
           What topic will you be teaching?
         </label>
@@ -58,18 +58,18 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           value={formData.topic}
           onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
           placeholder="e.g., Introduction to Programming, Educational Psychology, Digital Literacy"
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
           required
         />
         <div className="mt-2">
-          <p className="text-xs text-gray-500 mb-2">Example topics:</p>
+          <p className="text-xs text-gray-600 mb-2">Example topics:</p>
           <div className="flex flex-wrap gap-1 sm:gap-2">
             {exampleTopics.map((topic) => (
               <button
                 key={topic}
                 type="button"
                 onClick={() => setFormData({ ...formData, topic })}
-                className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                className="text-xs px-2 py-1 bg-gray-100 text-gray-800 hover:bg-gray-200 rounded-md transition-colors"
               >
                 {topic}
               </button>
@@ -80,7 +80,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
 
       {/* Class Level */}
       <div>
-        <label htmlFor="classLevel" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="classLevel" className="block text-sm font-semibold text-gray-900 mb-2">
           <Target className="inline w-4 h-4 mr-2" />
           Target Class Level
         </label>
@@ -88,7 +88,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           id="classLevel"
           value={formData.classLevel}
           onChange={(e) => setFormData({ ...formData, classLevel: e.target.value })}
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
         >
           {classLevels.map((level) => (
             <option key={level} value={level}>
@@ -100,7 +100,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
 
       {/* Duration */}
       <div>
-        <label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="duration" className="block text-sm font-semibold text-gray-900 mb-2">
           <Clock className="inline w-4 h-4 mr-2" />
           Class Duration (minutes)
         </label>
@@ -108,7 +108,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           id="duration"
           value={formData.duration}
           onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
         >
           {durations.map((duration) => (
             <option key={duration} value={duration}>
@@ -120,7 +120,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
 
       {/* Teaching Goals */}
       <div>
-        <label htmlFor="teachingGoals" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="teachingGoals" className="block text-sm font-semibold text-gray-900 mb-2">
           <Lightbulb className="inline w-4 h-4 mr-2" />
           Teaching Goals (Optional)
         </label>
@@ -130,7 +130,7 @@ export default function PresentationForm({ onSubmit, isLoading }: PresentationFo
           onChange={(e) => setFormData({ ...formData, teachingGoals: e.target.value })}
           placeholder="What should students learn or understand by the end of this class?"
           rows={3}
-          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
         />
       </div>
 

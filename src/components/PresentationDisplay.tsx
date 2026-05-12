@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { Presentation } from '@/types/presentation';
-import { Download, CheckCircle, XCircle } from 'lucide-react';
+import { exportPresentationToPdf } from '@/utils/exportPresentationPdf';
+import { Download, FileText, CheckCircle, XCircle } from 'lucide-react';
 
 interface PresentationDisplayProps {
   presentation: Presentation;
@@ -26,6 +27,10 @@ export default function PresentationDisplay({ presentation }: PresentationDispla
       }
     });
     return { correct, total: presentation.quiz.length };
+  };
+
+  const exportToPdf = () => {
+    exportPresentationToPdf(presentation);
   };
 
   const exportToText = () => {
@@ -71,12 +76,19 @@ export default function PresentationDisplay({ presentation }: PresentationDispla
       {/* Header */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">{presentation.title}</h1>
-        <div className="flex justify-center">
+        <div className="flex flex-col sm:flex-row justify-center gap-3">
           <button
-            onClick={exportToText}
-            className="flex items-center px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
+            onClick={exportToPdf}
+            className="flex items-center justify-center px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
           >
             <Download className="w-4 h-4 mr-2" />
+            Export as PDF
+          </button>
+          <button
+            onClick={exportToText}
+            className="flex items-center justify-center px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm sm:text-base"
+          >
+            <FileText className="w-4 h-4 mr-2" />
             Export as Text
           </button>
         </div>

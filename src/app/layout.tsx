@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Presentation Generator - Create Ready-Made Class Presentations",
+  title: "TeachSlide - Create Ready-Made Class Presentations",
   description: "Generate engaging slide decks, talking points, and quizzes in under 2 minutes. Perfect for educators who want to focus on teaching, not prep work.",
   viewport: "width=device-width, initial-scale=1",
 };
