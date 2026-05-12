@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { groqClient } from '@/utils/groqClient';
+import { parsePresentationResponse } from '@/utils/parsePresentationResponse';
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,7 +38,7 @@ Please create a comprehensive presentation with the following structure:
 
 3. QUIZ (3-5 multiple choice questions with answers)
 
-Format your response as JSON with this exact structure:
+Format your response as JSON with this exact structure and no markdown fences:
 {
   "title": "Presentation Title",
   "slides": [
@@ -65,19 +66,7 @@ Make the content engaging, age-appropriate, and suitable for the specified durat
       throw new Error('No response from Groq');
     }
 
-    // Parse the JSON response
-    let parsedResponse;
-    try {
-      parsedResponse = JSON.parse(response);
-    } catch {
-      // If JSON parsing fails, try to extract JSON from the response
-      const jsonMatch = response.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        parsedResponse = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('Invalid JSON response from Groq');
-      }
-    }
+    const parsedResponse = parsePresentationResponse(response);
 
     return NextResponse.json(parsedResponse);
 

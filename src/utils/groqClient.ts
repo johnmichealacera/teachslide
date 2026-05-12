@@ -8,6 +8,9 @@ interface ChatCompletionRequest {
   messages: ChatMessage[];
   temperature?: number;
   max_tokens?: number;
+  response_format?: {
+    type: 'json_object';
+  };
 }
 
 interface ChatCompletionResponse {
@@ -47,8 +50,11 @@ export class GroqClient {
   
   // Fallback models in order of preference (known good models)
   private fallbackModels = [
+    'openai/gpt-oss-20b',
+    'meta-llama/llama-4-scout-17b-16e-instruct',
+    'llama-3.3-70b-versatile',
     'llama3-8b-8192',
-    'llama3-70b-8192', 
+    'llama3-70b-8192',
     'mixtral-8x7b-32768',
     'gemma-7b-it'
   ];
@@ -101,14 +107,17 @@ export class GroqClient {
     
     // Preferred model patterns for free models (in order of preference)
     const preferredPatterns = [
-      /^llama.*3.*8b.*8192$/i,     // llama3-8b-8192 variants
-      /^llama.*3.*70b.*8192$/i,    // llama3-70b-8192 variants  
-      /^mixtral.*8x7b.*32768$/i,   // mixtral-8x7b-32768 variants
-      /^gemma.*7b.*it$/i,          // gemma-7b-it variants
-      /^llama.*8b/i,               // Any llama 8b model
-      /^llama.*70b/i,              // Any llama 70b model
-      /^mixtral/i,                 // Any mixtral model
-      /^gemma/i                    // Any gemma model
+      /^openai\/gpt-oss-20b$/i,
+      /^meta-llama\/llama-4-scout-17b-16e-instruct$/i,
+      /^llama-3\.3-70b-versatile$/i,
+      /^llama.*3.*8b.*8192$/i,
+      /^llama.*3.*70b.*8192$/i,
+      /^mixtral.*8x7b.*32768$/i,
+      /^gemma.*7b.*it$/i,
+      /^llama.*8b/i,
+      /^llama.*70b/i,
+      /^mixtral/i,
+      /^gemma/i
     ];
 
     // Try to find models matching preferred patterns
@@ -184,7 +193,8 @@ export class GroqClient {
         model: request.model,
         messages: request.messages,
         temperature: request.temperature || 0.7,
-        max_tokens: request.max_tokens || 2000,
+        max_tokens: request.max_tokens || 4096,
+        ...(request.response_format ? { response_format: request.response_format } : {}),
       }),
     });
 
@@ -214,8 +224,9 @@ export class GroqClient {
     const response = await this.createChatCompletion({
       model: selectedModel,
       messages,
-      temperature: 0.7,
-      max_tokens: 2000,
+      temperature: 0.4,
+      max_tokens: 4096,
+      response_format: { type: 'json_object' },
     });
 
     return response.choices[0]?.message?.content || '';
